@@ -13,4 +13,6 @@ logs:
 rm: down
 	docker-compose rm
 
+clean: rm
+
 .PHONY: *
