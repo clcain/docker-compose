@@ -1,0 +1,53 @@
+version: '2'
+
+volumes:
+  db:
+  nextcloud:
+
+services:
+  db:
+    image: mariadb
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    env_file:
+      - db.env
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+
+  app:
+    build: nextcloud
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:8000:80
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+      - OVERWRITEPROTOCOL=https
+    env_file:
+      - db.env
+    depends_on:
+      - db
+      - redis
+
+  cron:
+    build: nextcloud-cron
+    restart: unless-stopped
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+    env_file:
+      - db.env
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis
