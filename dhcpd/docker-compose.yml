@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  dhcpd:
+    build: .
+    restart: unless-stopped
+    network_mode: host
