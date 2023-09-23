@@ -1,0 +1,13 @@
+version: '2'
+
+volumes:
+  cache:
+
+services:
+  apt-cacher-ng:
+    build: .
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:8000:3142
+    volumes:
+      - ./cache:/var/cache/apt-cacher-ng
