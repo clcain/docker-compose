@@ -6,12 +6,16 @@ services:
     image: osixia/openldap:1.5.0
     restart: unless-stopped
     network_mode: host
+    volumes:
+      - ./ldap:/var/lib/ldap
+      - ./slapd.d:/etc/ldap/slapd.d
+      - ./certs:/container/service/slapd/assets/certs/
     env_file:
-      - 'env/example.env'
+      - env/example.env
     environment:
       LDAP_LOG_LEVEL: "256"
-      LDAP_ORGANISATION: "example.org"
-      LDAP_DOMAIN: "ldap.example.org"
+      LDAP_ORGANISATION: "example.com"
+      LDAP_DOMAIN: "ldap.example.com"
       LDAP_BASE_DN: ""
       LDAP_READONLY_USER: "true"
       LDAP_READONLY_USER_USERNAME: "readonly"
@@ -32,24 +36,20 @@ services:
       LDAP_SSL_HELPER_PREFIX: "ldap"
     tty: true
     stdin_open: true
-    volumes:
-      - ./ldap:/var/lib/ldap
-      - ./slapd.d:/etc/ldap/slapd.d
-      - ./certs:/container/service/slapd/assets/certs/
-    domainname: ldap.example.org
-    hostname: ldap.example.org
+    domainname: ldap.example.com
+    hostname: ldap.example.com
 
   phpldapadmin:
     container_name: phpldapadmin
     image: osixia/phpldapadmin:latest
     restart: unless-stopped
     network_mode: host
+    volumes:
+      - ./phpldapadmin/etc/apache2/ports.conf:/etc/apache2/ports.conf
+      - ./phpldapadmin/etc/apache2/sites-enabled/phpldapadmin.conf:/etc/apache2/sites-enabled/phpldapadmin.conf
     environment:
       PHPLDAPADMIN_LDAP_HOSTS: "#PYTHON2BASH:[{'localhost': [{'server': [{'tls': True}]}]}]"
       PHPLDAPADMIN_LDAP_CLIENT_TLS_REQCERT: never
       PHPLDAPADMIN_HTTPS: "false"
-    volumes:
-      - ./phpldapadmin/etc/apache2/ports.conf:/etc/apache2/ports.conf
-      - ./phpldapadmin/etc/apache2/sites-enabled/phpldapadmin.conf:/etc/apache2/sites-enabled/phpldapadmin.conf
     depends_on:
       - openldap

@@ -2,8 +2,8 @@ version: '3'
 
 services:
   deconz:
-    image: marthoc/deconz
     container_name: deconz
+    image: marthoc/deconz
     network_mode: host
     restart: unless-stopped
     volumes:

@@ -10,10 +10,9 @@ restart:
 logs:
 	docker-compose logs -f
 
-rm: down
-	docker-compose rm
-
-clean: rm
-	rm -rf ./mysql/*
+clean:
+	docker-compose down -t 0
+	docker-compose rm -fv
+	sudo rm -rf ./mysql/*
 
 .PHONY: *

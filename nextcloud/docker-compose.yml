@@ -1,15 +1,11 @@
 version: '3'
 
-volumes:
-  db:
-  nextcloud:
-
 services:
   db:
     image: mariadb
     restart: unless-stopped
     volumes:
-      - db:/var/lib/mysql
+      - ./nextcloud/db/:/var/lib/mysql/
     environment:
       - MYSQL_ROOT_PASSWORD=root
     env_file:
@@ -20,13 +16,14 @@ services:
     image: redis:alpine
     restart: unless-stopped
 
-  app:
+  nextcloud:
     build: nextcloud
     restart: unless-stopped
     ports:
       - 127.0.0.1:8000:80
     volumes:
-      - nextcloud:/var/www/html
+      - ./nextcloud/html/:/var/www/html/
+      - ./nextcloud/data/:/var/www/html/data/
     environment:
       - MYSQL_HOST=db
       - REDIS_HOST=redis
@@ -41,7 +38,8 @@ services:
     build: nextcloud-cron
     restart: unless-stopped
     volumes:
-      - nextcloud:/var/www/html
+      - ./nextcloud/html/.:/var/www/html/
+      - ./nextcloud/data/:/var/www/html/data/
     environment:
       - MYSQL_HOST=db
       - REDIS_HOST=redis
@@ -51,3 +49,4 @@ services:
     depends_on:
       - db
       - redis
+      - nextcloud

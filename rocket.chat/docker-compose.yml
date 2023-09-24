@@ -7,14 +7,14 @@ services:
     restart: unless-stopped
     volumes:
       - ./rocket.chat/uploads:/app/uploads
+    ports:
+      - 8000:3000
     environment:
       - PORT=3000
       - ROOT_URL=http://chat.example.com
       - MONGO_URL=mongodb://mongo:27017/rocketchat
       - MONGO_OPLOG_URL=mongodb://mongo:27017/local
       - Accounts_UseDNSDomainCheck=True
-    ports:
-      - 8000:3000
     depends_on:
       - mongo
 

@@ -5,6 +5,7 @@ volumes:
 
 services:
   apt-cacher-ng:
+    container_name: apt-cacher-ng
     build: .
     restart: unless-stopped
     ports:

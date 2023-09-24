@@ -10,10 +10,9 @@ restart:
 logs:
 	docker-compose logs -f
 
-rm: down
-	docker-compose rm
-
-clean: rm
-	rm -rf ./rocket.chat/*
+clean:
+	docker-compose down -t 0
+	docker-compose rm -fv
+	sudo rm -rf ./rocket.chat/*
 
 .PHONY: *

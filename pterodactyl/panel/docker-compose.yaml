@@ -9,16 +9,16 @@ x-common:
     MYSQL_ROOT_PASSWORD: "CHANGE_ME_TOO"
   panel:
     &panel-environment
-    APP_URL: "https://example.org"
+    APP_URL: "https://example.com"
     # A list of valid timezones can be found here: http://php.net/manual/en/timezones.php
     APP_TIMEZONE: "America/New_York"
-    APP_SERVICE_AUTHOR: "admin@example.org"
+    APP_SERVICE_AUTHOR: "admin@example.com"
     # Uncomment the line below and set to a non-empty value if you want to use Let's Encrypt
     # to generate an SSL certificate for the Panel.
     # LE_EMAIL: ""
   mail:
     &mail-environment
-    MAIL_FROM: "info@example.org"
+    MAIL_FROM: "info@example.com"
     MAIL_DRIVER: "smtp"
     MAIL_HOST: "mail"
     MAIL_PORT: "1025"
@@ -34,7 +34,6 @@ x-common:
 # below if you understand what you are doing.
 #
 services:
-
   database:
     image: mariadb:10.5
     restart: always
@@ -54,7 +53,7 @@ services:
     image: ghcr.io/pterodactyl/panel:latest
     restart: always
     ports:
-      - "8000:80"
+      - "80:80"
     links:
       - database
       - cache

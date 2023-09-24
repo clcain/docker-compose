@@ -10,10 +10,6 @@ restart:
 logs:
 	docker-compose logs -f
 
-rm:
-	docker-compose down -v
-	docker-compose rm
-
 clean: rm
 	sudo rm -rf ./certs/*
 	sudo rm -rf ./ldap/*

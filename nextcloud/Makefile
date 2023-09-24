@@ -10,9 +10,11 @@ restart:
 logs:
 	docker-compose logs -f
 
-rm: down
-	docker-compose rm
-
-clean: rm
+clean:
+	docker-compose down -t 0
+	docker-compose rm -fv
+	sudo rm -rf ./html/*
+	sudo rm -rf ./db/*
+	# sudo rm -rf ./data/*
 
 .PHONY: *

@@ -10,11 +10,10 @@ restart:
 logs:
 	docker-compose logs -f
 
-rm: down
-	docker-compose rm
-
-clean: rm
-	rm -rf ./data/*
-	rm -rf ./letsencrypt/*
+clean:
+	docker-compose down -t 0
+	docker-compose rm -fv
+	sudo rm -rf ./data/*
+	sudo rm -rf ./letsencrypt/*
 
 .PHONY: *

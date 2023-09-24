@@ -10,13 +10,8 @@ restart:
 logs:
 	docker-compose logs -f
 
-shell:
-	./shell.sh
-
-rm:
-	docker-compose down -v
-	docker-compose rm
-
-clean: rm
+clean:
+	docker-compose down -t 0
+	docker-compose rm -fv
 
 .PHONY: *

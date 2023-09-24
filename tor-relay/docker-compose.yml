@@ -1,7 +1,8 @@
 version: '3'
 
 services:
-  tor:
+  tor-relay:
+    container_name: tor-relay
     build: .
     restart: unless-stopped
     ports:

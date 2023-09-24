@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker exec -ti nextcloud-app-1 sudo PHP_MEMORY_LIMIT=512M -u www-data php /var/www/html/occ "$@"
+docker exec -ti nextcloud-nextcloud-1 sudo -u www-data PHP_MEMORY_LIMIT=512M php /var/www/html/occ "$@"
