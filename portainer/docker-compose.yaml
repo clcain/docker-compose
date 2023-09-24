@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  portainer-ce:
+    container_name: portainer-ce
+    image: portainer/portainer-ce:latest
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer_data:/data
