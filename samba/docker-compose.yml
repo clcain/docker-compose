@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  samba:
+    build: .
+    restart: unless-stopped
+    ports:
+      - 445:445
+    volumes:
+      - ./smb.conf:/etc/samba/smb.conf
+      - ./storage/:/storage/
