@@ -3,9 +3,6 @@ FROM alpine:3.7
 # add packages
 RUN apk --no-cache add bash tor
 
-# expose default tor port
-EXPOSE 9001
-
 # copy in configuration files
 COPY torrc.bridge /etc/tor/torrc.bridge
 COPY torrc.middle /etc/tor/torrc.middle
