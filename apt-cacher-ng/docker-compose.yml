@@ -9,6 +9,6 @@ services:
     build: .
     restart: unless-stopped
     ports:
-      - 127.0.0.1:8000:3142
+      - 127.0.0.1:3142:3142
     volumes:
       - ./cache:/var/cache/apt-cacher-ng

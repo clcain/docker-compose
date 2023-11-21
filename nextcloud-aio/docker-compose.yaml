@@ -6,7 +6,7 @@ services:
     image: nextcloud/all-in-one:latest
     restart: unless-stopped
     ports:
-      - 8080:8080
+      - 127.0.0.1:8080:8080
     volumes:
       - nextcloud_aio_mastercontainer:/mnt/docker-aio-config
       - /var/run/docker.sock:/var/run/docker.sock:ro

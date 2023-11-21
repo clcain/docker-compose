@@ -5,7 +5,7 @@ services:
     build: .
     restart: unless-stopped
     ports:
-      - 445:445
+      - 127.0.0.1:445:445
     volumes:
       - ./smb.conf:/etc/samba/smb.conf
       - ./storage/:/storage/
