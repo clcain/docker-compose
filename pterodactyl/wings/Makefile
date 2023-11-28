@@ -13,6 +13,5 @@ logs:
 clean:
 	docker-compose down -t 0
 	docker-compose rm -fv
-	sudo rm -rf ./pterodactyl/*
 
 .PHONY: *
