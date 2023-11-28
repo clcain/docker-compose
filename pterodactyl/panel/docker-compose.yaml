@@ -36,10 +36,10 @@ x-common:
 services:
   database:
     image: mariadb:10.5
-    restart: always
+    restart: unless-stopped
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - "/pterodactyl/database:/var/lib/mysql"
+      - "./pterodactyl/database/:/var/lib/mysql/"
     environment:
       <<: *db-environment
       MYSQL_DATABASE: "panel"
@@ -47,13 +47,13 @@ services:
 
   cache:
     image: redis:alpine
-    restart: always
+    restart: unless-stopped
 
   panel:
     image: ghcr.io/pterodactyl/panel:latest
-    restart: always
+    restart: unless-stopped
     ports:
-      - "80:80"
+      - "8000:80"
     links:
       - database
       - cache
@@ -61,7 +61,7 @@ services:
       - "./pterodactyl/var/:/app/var/"
       - "./pterodactyl/nginx/:/etc/nginx/http.d/"
       - "./pterodactyl/certs/:/etc/letsencrypt/"
-      - "./pterodactyl/logs/:/app/storage/logs"
+      - "./pterodactyl/logs/:/app/storage/logs/"
     environment:
       <<: [*panel-environment, *mail-environment]
       DB_PASSWORD: *db-password
