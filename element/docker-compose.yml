@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  element-web:
+    image: vectorim/element-web
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./config.json:/app/config.json
