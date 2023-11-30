@@ -1,4 +1,4 @@
-up:
+up: down
 	touch config.json
 	docker-compose up -d
 
