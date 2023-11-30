@@ -20,7 +20,7 @@ services:
     build: nextcloud
     restart: unless-stopped
     ports:
-      - 127.0.0.1:8000:80
+      - 8000:80
     volumes:
       - ./html/:/var/www/html/
       - ./data/:/var/www/html/data/
