@@ -6,6 +6,11 @@ then
     exit 1
 fi
 
+if [ "$EUID" -eq 0 ]
+then
+    USER=admin
+fi
+
 certs_dir="/home/$USER/git/nginx-https-proxy/letsencrypt/live/$1"
 
 set -e
@@ -20,4 +25,4 @@ sudo cp $certs_dir/privkey.pem ./certs/ldap.key
 
 sudo chown -R 911:911 ./certs/
 
-make restart
+sudo -u $USER make restart
