@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  nginx:
+    image: nginx
+    restart: always
+    env_file: env
+    volumes:
+      - ./config/nginx/in-vhost.conf:/etc/nginx/conf.d/in-vhost.conf:ro
+      - ./docker/app/public:/var/www/app/public:ro
+    depends_on:
+      - app
+    ports:
+      - "8000:80"
+    networks:
+      - invoiceninja
+
+  db:
+    image: mysql:8
+    restart: always
+    env_file: env
+    volumes:
+      - ./data/mysql:/var/lib/mysql:rw,delegated
+    networks:
+      - invoiceninja
+
+  in5:
+    image: invoiceninja/invoiceninja:5
+    env_file: env
+    restart: always
+    volumes:
+      - ./data/in5/public:/var/www/app/public:rw,delegated
+      - ./data/in5/storage:/var/www/app/storage:rw,delegated
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+      - ./config/php/php-cli.ini:/usr/local/etc/php/php-cli.ini
+    depends_on:
+      - db
+    networks:
+      - invoiceninja
+
+networks:
+  invoiceninja:
