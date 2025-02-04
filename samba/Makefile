@@ -1,19 +1,19 @@
 up: down
-	docker-compose up -d
+	docker compose up -d
 	./init.sh
 
 down:
-	docker-compose down
+	docker compose down
 
 restart:
-	docker-compose restart
+	docker compose restart
 
 logs:
-	docker-compose logs -f
+	docker compose logs -f
 
 clean:
-	docker-compose down -t 0
-	docker-compose rm -fv
+	docker compose down -t 0
+	docker compose rm -fv
 	sudo rm -rf ./storage/*
 
 .PHONY: *
