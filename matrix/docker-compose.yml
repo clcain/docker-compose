@@ -2,7 +2,8 @@ version: '3'
 
 services:
   synapse:
-    image: docker.io/matrixdotorg/synapse:latest
+    #image: docker.io/matrixdotorg/synapse:latest
+    build: .
     # Since synapse does not retry to connect to the database, restart upon
     # failure
     restart: unless-stopped
