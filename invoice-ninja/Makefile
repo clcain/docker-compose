@@ -13,5 +13,6 @@ logs:
 clean:
 	docker compose down -t 0
 	docker compose rm -fv
+	rm -rf ./data/*
 
 .PHONY: *
