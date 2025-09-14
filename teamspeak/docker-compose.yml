@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  teamspeak:
+    image: teamspeak
+    restart: always
+    ports:
+      - 9987:9987/udp
+      - 10011:10011
+      - 30033:30033
+    env_file: .env
+  db:
+    image: mariadb
+    restart: always
+    env_file: .env
