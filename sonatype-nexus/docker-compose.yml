@@ -1,7 +1,24 @@
 services:
   nexus:
     image: sonatype/nexus3
+    restart: unless-stopped
     volumes:
       - ./data/nexus-data:/nexus-data
     ports:
       - "8000:8081"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: ${POSTGRES_IMAGE}
+    restart: unless-stopped
+    volumes:
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+      - ./data/postgres-data:/var/lib/postgresql/data
+    env_file: .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
