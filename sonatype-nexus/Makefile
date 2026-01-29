@@ -1,5 +1,7 @@
 up: down
 	docker compose up -d
+	sudo mkdir -p ./data/nexus-data/
+	sudo chown -R 200:200 ./data/nexus-data/
 
 down:
 	docker compose down
