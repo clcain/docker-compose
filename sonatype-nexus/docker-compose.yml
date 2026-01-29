@@ -9,9 +9,10 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    env_file: .env
 
   db:
-    image: ${POSTGRES_IMAGE}
+    image: postgres
     restart: unless-stopped
     volumes:
       - ./postgres/init:/docker-entrypoint-initdb.d:ro
