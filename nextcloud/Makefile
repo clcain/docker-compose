@@ -13,8 +13,11 @@ logs:
 clean:
 	docker compose down -t 0
 	docker compose rm -fv
-	sudo rm -rf ./html/*
-	sudo rm -rf ./db/*
-	# sudo rm -rf ./data/*
+    sudo rm -rf ./html
+    sudo rm -rf ./db
+    sudo rm -rf ./data
+    sudo mkdir ./html
+    sudo mkdir ./db
+    sudo mkdir ./data
 
 .PHONY: *
