@@ -14,6 +14,6 @@ logs:
 clean:
 	docker compose down -t 0
 	docker compose rm -fv
-	rm -rf ./data/*
+	rm -rf ./data/headscale/lib/* ./data/headplane/lib/*
 
 .PHONY: *

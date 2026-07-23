@@ -1,0 +1,7 @@
+server:
+  base_url: "https://hs-admin.example.com"
+  cookie_secret: "0123456789abcdef0123456789abcdef"
+
+headscale:
+  url: "http://headscale:8080"
+  public_url: "https://hs.example.com"
