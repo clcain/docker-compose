@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   tor-relay:
     container_name: tor-relay

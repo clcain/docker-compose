@@ -1,5 +1,3 @@
-version: '3'
-
 x-common:
   database:
     &db-environment
