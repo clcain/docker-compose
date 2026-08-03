@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  qr-code-styling:
+    container_name: qr-code-styling
+    image: clcain/qr-code-styling-site
+    restart: unless-stopped
+    ports:
+      - 8000:8000
